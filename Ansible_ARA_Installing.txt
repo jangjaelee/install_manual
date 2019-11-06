@@ -1,0 +1,41 @@
+1) Installing ARA
+pip install ara
+pip install ara[server]
+
+2) Configuring Ansible to use ARA
+
+# command line:
+python3 -m ara.setup.ansible
+[defaults]
+callback_plugins=/root/src/ansible/ara/ara/plugins/callback
+action_plugins=/root/src/ansible/ara/ara/plugins/action
+
+※ add to ansible.cfg of callback_plugins and action_plugins lines
+
+# add to ansible.cfg them plugin configuration or use environment variables
+[ara]
+api_client = http
+api_server = https://api.demo.recordsansible.org
+api_username = user
+api_password = password
+api_timeout = 15
+ignored_facts = '["ansible_env", "ansible_all_ipv4_addresses"]'
+ignored_arguments = '["extra_vars", "vault_password_files"]'
+
+export ARA_API_CLIENT=http
+export ARA_API_SERVER="https://api.demo.recordsansible.org"
+export ARA_API_USERNAME=user
+export ARA_API_PASSWORD=password
+export ARA_API_TIMEOUT=15
+export ARA_IGNORED_FACTS='["ansible_env", "ansible_all_ipv4_addresses"]'
+export ARA_IGNORED_ARGUMENTS='["extra_vars", "vault_password_files"]'
+
+3) Creating ARA API database of Django
+git clone https://github.com/ansible-community/ara.git
+cd ara
+python3 manage.py migrate
+
+※ requirements
+- python modules : tzlocal, django-health-check, pygments
+  ㄴ pip install tzlocal django-health-check
+- SQLite 3.8.3 or later
