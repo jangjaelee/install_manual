@@ -7,8 +7,8 @@ pip install ara[server]
 # command line:
 python3 -m ara.setup.ansible
 [defaults]
-callback_plugins=/root/src/ansible/ara/ara/plugins/callback
-action_plugins=/root/src/ansible/ara/ara/plugins/action
+callback_plugins=/usr/local/lib/python3.6/site-packages/ara/plugins/callback
+action_plugins=/usr/local/lib/python3.6/site-packages/ara/plugins/action
 
 ※ add to ansible.cfg of callback_plugins and action_plugins lines
 
